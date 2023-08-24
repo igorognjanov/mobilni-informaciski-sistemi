@@ -19,12 +19,6 @@ public class Poll {
     @Column(name = "question_name")
     private String questionName;
 
-    @Column(name = "allows_custom_answers")
-    private Boolean allowsCustomAnswers;
-
-    @Column(name = "is_multiple_choice")
-    private Boolean isMultipleChoice;
-
     @Column(name = "is_deleted")
     private Boolean isDeleted;
 

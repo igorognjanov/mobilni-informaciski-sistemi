@@ -19,4 +19,7 @@ public class PollOption {
     @ManyToOne
     @JoinColumn(name = "poll_id")
     private Poll poll;
+
+    @Column(name = "is_deleted")
+    private Boolean isDeleted;
 }

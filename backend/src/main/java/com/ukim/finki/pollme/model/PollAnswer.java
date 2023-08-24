@@ -17,4 +17,8 @@ public class PollAnswer {
     @JoinColumn(name = "poll_option_id")
     private PollOption pollOption;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
 }

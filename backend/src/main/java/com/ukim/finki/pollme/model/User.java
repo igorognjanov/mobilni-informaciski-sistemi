@@ -3,8 +3,8 @@ package com.ukim.finki.pollme.model;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+//import org.springframework.security.core.GrantedAuthority;
+//import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -14,7 +14,9 @@ import java.util.Collections;
 @Getter
 @Entity
 @Table(name = "poll_users")
-public class User implements UserDetails {
+public class User
+//        implements UserDetails
+{
 
     @Id
     private String username;
@@ -46,28 +48,28 @@ public class User implements UserDetails {
 
     }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singletonList (role);
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return isAccountNonExpired;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return isAccountNonLocked;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return isCredentialsNonExpired;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return isEnabled;
-    }
+//    @Override
+//    public Collection<? extends GrantedAuthority> getAuthorities() {
+//        return Collections.singletonList (role);
+//    }
+//
+//    @Override
+//    public boolean isAccountNonExpired() {
+//        return isAccountNonExpired;
+//    }
+//
+//    @Override
+//    public boolean isAccountNonLocked() {
+//        return isAccountNonLocked;
+//    }
+//
+//    @Override
+//    public boolean isCredentialsNonExpired() {
+//        return isCredentialsNonExpired;
+//    }
+//
+//    @Override
+//    public boolean isEnabled() {
+//        return isEnabled;
+//    }
 }
