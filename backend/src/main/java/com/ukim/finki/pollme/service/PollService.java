@@ -5,6 +5,8 @@ import com.ukim.finki.pollme.repository.PollRepository;
 import com.ukim.finki.pollme.model.request.PollRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PollService {
 
@@ -16,6 +18,10 @@ public class PollService {
             UserService userService) {
         this.pollRepository = pollRepository;
         this.userService = userService;
+    }
+
+    public List<Poll> findAll(){
+        return this.pollRepository.findAll();
     }
 
     public Poll findById(Long id) {

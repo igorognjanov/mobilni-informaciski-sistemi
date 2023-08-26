@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pollme/model/poll.dart';
 import 'package:pollme/pages/poll-create-page.dart';
+import 'package:pollme/service/poll-service.dart';
 import 'package:pollme/widgets/poll-card.dart';
 import 'package:pollme/widgets/stats.dart';
 
@@ -16,6 +17,35 @@ class PollDashBoardPage extends StatefulWidget {
 }
 
 class _PollDashBoardPageState extends State<PollDashBoardPage> {
+  List<PollCard> pollCards = [];
+  bool isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchPolls();
+  }
+
+  _fetchPolls() async {
+    try {
+      List<Poll> fetchedPolls = await findPolls();
+      setState(() {
+        pollCards = fetchedPolls
+            .map((e) => PollCard(
+                  poll: e,
+                  navigateCallback: _navigateToPollCreatePage,
+                ))
+            .toList();
+        isLoading = false;
+      });
+    } catch (error) {
+      print(error);
+      setState(() {
+        isLoading = false;
+      });
+    }
+  }
+
   void _logout(BuildContext context) {
     Navigator.pushReplacement(
       context,
@@ -23,18 +53,23 @@ class _PollDashBoardPageState extends State<PollDashBoardPage> {
     );
   }
 
-  void _navigateToPollCreatePage(BuildContext context) {
-    Navigator.push(context,
-        MaterialPageRoute(builder: (context) => const PollCreatePage()));
+  void _navigateToPollCreatePage(
+    BuildContext context,
+    Poll? poll,
+  ) async {
+    final result = await Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => PollCreatePage(
+                  poll: poll,
+                )));
+    if (result) {
+      _fetchPolls();
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    List<PollCard> pollCards = [
-      PollCard(poll: Poll(pollName: 'Poll 1', questionName: 'Hello world')),
-      PollCard(poll: Poll(pollName: 'Poll 2', questionName: 'Hello world')),
-      PollCard(poll: Poll(pollName: 'Poll 3', questionName: 'Hello world')),
-    ];
     return Scaffold(
         appBar: AppBar(
           elevation: 4,
@@ -43,7 +78,7 @@ class _PollDashBoardPageState extends State<PollDashBoardPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               ElevatedButton(
-                onPressed: () => _navigateToPollCreatePage(context),
+                onPressed: () => _navigateToPollCreatePage(context, null),
                 style: ElevatedButton.styleFrom(
                     minimumSize: const Size(100.0, 35),
                     shape: RoundedRectangleBorder(
@@ -68,7 +103,14 @@ class _PollDashBoardPageState extends State<PollDashBoardPage> {
         ),
         body: Column(
           children: [
-            HorizontalPollCardList(pollCards: pollCards),
+            isLoading
+                ? const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 30.0),
+                    child: CircularProgressIndicator(),
+                  )
+                : HorizontalPollCardList(
+                    pollCards: pollCards,
+                  ),
             Text('Stats'),
             Stats(),
           ],
