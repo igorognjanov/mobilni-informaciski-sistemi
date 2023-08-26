@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pollme/model/poll-option.dart';
+import 'package:pollme/service/poll-service.dart';
 
 import '../model/poll.dart';
 
@@ -148,6 +149,8 @@ class _PollCreatePageState extends State<PollCreatePage> {
                         'Poll Created: ${poll.pollName} - ${poll
                             .questionName}');
                     print('Options: $_options');
+                    print('sending poll');
+                    createPoll(poll, []);
                     Navigator.of(context).pop(context);
                   }
                 },
