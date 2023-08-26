@@ -9,9 +9,13 @@ import org.springframework.stereotype.Service;
 public class PollService {
 
     PollRepository pollRepository;
+    UserService userService;
 
-    public PollService(PollRepository pollRepository) {
+    public PollService(
+            PollRepository pollRepository,
+            UserService userService) {
         this.pollRepository = pollRepository;
+        this.userService = userService;
     }
 
     public Poll findById(Long id) {
@@ -24,6 +28,7 @@ public class PollService {
         if (pollRequest.getId () == null) {
             poll = new Poll ();
             poll.setIsDeleted (false);
+//            poll.setCreatedBy (userService.getLoggedInUser ());
         } else {
             poll = findById (pollRequest.getId ());
         }

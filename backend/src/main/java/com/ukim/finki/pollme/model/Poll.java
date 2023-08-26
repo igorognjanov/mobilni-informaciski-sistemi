@@ -22,4 +22,8 @@ public class Poll {
     @Column(name = "is_deleted")
     private Boolean isDeleted;
 
+    @ManyToOne
+    @JoinColumn(name = "created_by")
+    private User createdBy;
+
 }
