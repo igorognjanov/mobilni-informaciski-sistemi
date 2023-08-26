@@ -1,24 +1,22 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pollme/model/poll.dart';
-import 'package:pollme/pages/poll-create-page.dart';
 
 class PollCard extends StatelessWidget {
   final Poll poll;
   final bool showEdit;
+  final Function(BuildContext context, Poll? poll) navigateCallback;
 
-  const PollCard({super.key, required this.poll, this.showEdit = false});
+  const PollCard(
+      {super.key,
+      required this.poll,
+      required this.navigateCallback,
+      this.showEdit = false});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => PollCreatePage(
-                    poll: poll,
-                    pollOptions: [],
-                  ))),
+      onTap: () => navigateCallback(context, poll),
       child: Card(
         elevation: 10,
         child: SizedBox(

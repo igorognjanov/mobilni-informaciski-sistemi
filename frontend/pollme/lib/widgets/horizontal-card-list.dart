@@ -5,7 +5,9 @@ import 'package:pollme/widgets/poll-card.dart';
 class HorizontalPollCardList extends StatelessWidget {
   final List<PollCard> pollCards;
 
-  const HorizontalPollCardList({super.key, required this.pollCards});
+  const HorizontalPollCardList(
+      {super.key,
+      required this.pollCards});
 
   @override
   Widget build(BuildContext context) {

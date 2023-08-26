@@ -16,11 +16,11 @@ class Stats extends StatelessWidget {
         children: [
           Card(
             child: Padding(
-              padding: EdgeInsets.all(10.0),
+              padding: const EdgeInsets.all(10.0),
               child: SizedBox(
                   child: Column(children: [
-                Text(
-                  'Total Anwsers',
+                const Text(
+                  'Total Answers',
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
                 ),
                 PollCardBox()
@@ -29,17 +29,17 @@ class Stats extends StatelessWidget {
           ),
           Card(
               child: Padding(
-            padding: EdgeInsets.all(10.0),
+            padding: const EdgeInsets.all(10.0),
             child: SizedBox(
                 child: Column(children: [
-              Text(
+              const Text(
                 'Most anwsered poll',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
               ),
-              PollCard(
-                poll: Poll(pollName: 'Poll 2', questionName: ''),
-                showEdit: false,
-              )
+              // PollCard(
+              //   poll: Poll(pollName: 'Poll 2', questionName: ''),
+              //   showEdit: false,
+              // )
             ])),
           ))
         ],
