@@ -27,17 +27,24 @@ public class PollOptionService {
                 new RuntimeException (String.format ("PollOption with id = [%d] does not exist", id)));
     }
 
-    public Long createOrUpdate(PollOptionRequest pollOptionRequest) {
-        PollOption pollOption;
-        if (pollOptionRequest.getId () == null) {
-            pollOption = new PollOption ();
-            pollOption.setIsDeleted (false);
-        } else {
-            pollOption = findById (pollOptionRequest.getId ());
-        }
-        pollOption.setName (pollOptionRequest.getName ());
-        pollOption.setPoll (pollService.findById (pollOptionRequest.getPollId ()));
-        return pollOptionRepository.save (pollOption).getId ();
+    public List<Long> createOrUpdate(List<PollOptionRequest> pollOptionRequests) {
+        List<PollOption> pollOptions = pollOptionRequests.stream ().map (pollOptionRequest -> {
+            PollOption pollOption;
+            if (pollOptionRequest.getId () == null) {
+                pollOption = new PollOption ();
+                pollOption.setIsDeleted (false);
+            } else {
+                pollOption = findById (pollOptionRequest.getId ());
+            }
+            pollOption.setName (pollOptionRequest.getName ());
+            if (pollOptionRequest.getPollId () != null)
+                pollOption.setPoll (pollService.findById (pollOptionRequest.getPollId ()));
+            return pollOption;
+        }).collect (Collectors.toList ());
+        return pollOptionRepository.saveAll (pollOptions)
+                .stream ()
+                .map (PollOption::getId)
+                .collect (Collectors.toList ());
     }
 
     public List<PollOptionResponse> findAllByPollId(Long pollId) {

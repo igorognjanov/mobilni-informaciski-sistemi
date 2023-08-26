@@ -18,8 +18,8 @@ public class PollOptionController {
     }
 
     @PostMapping
-    public Long createOrUpdate(@RequestBody PollOptionRequest pollOptionRequest) {
-        return pollOptionService.createOrUpdate (pollOptionRequest);
+    public List<Long> createOrUpdate(@RequestBody List<PollOptionRequest> pollOptionRequests) {
+        return pollOptionService.createOrUpdate (pollOptionRequests);
     }
 
     @GetMapping("{pollId}")
