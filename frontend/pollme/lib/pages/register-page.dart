@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pollme/service/auth-service.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -84,7 +85,9 @@ class _RegisterPageState extends State<RegisterPage> {
                     const SizedBox(height: 16.0),
                     ElevatedButton(
                       onPressed: () {
-                        // Handle login logic
+                        register(_emailController.text,
+                            _passwordController.text, _confirmPassword.text);
+                        Navigator.pop(context);
                       },
                       style: ElevatedButton.styleFrom(
                           minimumSize: const Size(double.infinity, 40),

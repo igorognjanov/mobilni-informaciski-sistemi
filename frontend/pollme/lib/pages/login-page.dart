@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pollme/pages/poll-dashboard-page.dart';
 import 'package:pollme/pages/register-page.dart';
+import 'package:pollme/service/auth-service.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -14,8 +15,8 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  Widget _createTextField(
-      String title, TextEditingController controller, bool obscure) {
+  Widget _createTextField(String title, TextEditingController controller,
+      bool obscure) {
     return TextField(
       controller: controller,
       decoration: InputDecoration(
@@ -38,14 +39,21 @@ class _LoginPageState extends State<LoginPage> {
         .push(MaterialPageRoute(builder: (context) => const RegisterPage()));
   }
 
-  void _login() {
-    Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => const PollDashBoardPage()));
+  void _login() async {
+    var result = await login(_emailController.text, _passwordController.text);
+    if(result) {
+      Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => const PollDashBoardPage()));
+    }
+
   }
 
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
+    double screenWidth = MediaQuery
+        .of(context)
+        .size
+        .width;
     double cardWidth =
         screenWidth - 80; // Subtracting 20 pixels from each side for margin
     return Scaffold(

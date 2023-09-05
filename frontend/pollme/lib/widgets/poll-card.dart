@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pollme/model/poll.dart';
+import 'package:pollme/pages/vote-page.dart';
 
 class PollCard extends StatelessWidget {
   final Poll poll;
@@ -16,7 +17,9 @@ class PollCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => navigateCallback(context, poll),
+      onLongPress: () => navigateCallback(context, poll),
+      onTap: () => Navigator.push(context,
+          MaterialPageRoute(builder: (context) => VotePage(poll: poll))),
       child: Card(
         elevation: 10,
         child: SizedBox(
