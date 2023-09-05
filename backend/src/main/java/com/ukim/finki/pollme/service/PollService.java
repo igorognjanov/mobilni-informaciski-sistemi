@@ -34,7 +34,7 @@ public class PollService {
         if (pollRequest.getId () == null) {
             poll = new Poll ();
             poll.setIsDeleted (false);
-//            poll.setCreatedBy (userService.getLoggedInUser ());
+            poll.setCreatedBy (userService.getLoggedInUser ());
         } else {
             poll = findById (pollRequest.getId ());
         }

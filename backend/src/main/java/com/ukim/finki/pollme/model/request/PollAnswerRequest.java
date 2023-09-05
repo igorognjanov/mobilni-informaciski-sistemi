@@ -6,6 +6,5 @@ import lombok.Data;
 public class PollAnswerRequest {
 
     private Long pollOptionId;
-    private Long userId;
 
 }

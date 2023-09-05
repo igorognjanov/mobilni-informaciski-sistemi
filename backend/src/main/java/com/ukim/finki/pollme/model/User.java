@@ -18,6 +18,7 @@ import java.util.Collections;
 public class User implements UserDetails {
 
     @Id
+    @Column(name = "username")
     private String username;
 
     @Column(name = "password")

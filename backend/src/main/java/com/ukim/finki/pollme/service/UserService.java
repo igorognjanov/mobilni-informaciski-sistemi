@@ -10,5 +10,7 @@ public interface UserService extends UserDetailsService {
 
     User getUserByUsername(String username);
 
+    User getLoggedInUser();
+
 }
 

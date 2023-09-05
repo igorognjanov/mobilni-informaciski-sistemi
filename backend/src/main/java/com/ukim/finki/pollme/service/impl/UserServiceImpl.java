@@ -34,6 +34,7 @@ public class UserServiceImpl implements UserService {
         return userRepository.save (user);
     }
 
+    @Override
     public User getLoggedInUser() {
         Authentication authentication = SecurityContextHolder.getContext ().getAuthentication ();
         boolean isLoggedIn = authentication instanceof AnonymousAuthenticationToken && authentication.isAuthenticated ();
