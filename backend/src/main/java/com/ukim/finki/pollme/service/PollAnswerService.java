@@ -17,13 +17,14 @@ public class PollAnswerService {
             UserService userService) {
         this.pollAnswerRepository = pollAnswerRepository;
         this.pollOptionService = pollOptionService;
+        this.userService = userService;
     }
 
     public void create(Long pollOptionId) {
-        PollAnswer pollAnswer = new PollAnswer ();
-        pollAnswer.setPollOption (pollOptionService.findById (pollOptionId));
-        pollAnswer.setUser (userService.getLoggedInUser ());
-        pollAnswerRepository.save (pollAnswer);
+        PollAnswer pollAnswer = new PollAnswer();
+        pollAnswer.setPollOption(pollOptionService.findById(pollOptionId));
+        pollAnswer.setUser(userService.getLoggedInUser());
+        pollAnswerRepository.save(pollAnswer);
     }
 
 }

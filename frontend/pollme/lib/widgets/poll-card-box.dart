@@ -18,7 +18,7 @@ class PollCardBox extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "250",
+                 "250",
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
               ),
             ],

@@ -32,15 +32,12 @@ class Stats extends StatelessWidget {
             padding: const EdgeInsets.all(10.0),
             child: SizedBox(
                 child: Column(children: [
-              const Text(
-                'Most anwsered poll',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
-              ),
-              // PollCard(
-              //   poll: Poll(pollName: 'Poll 2', questionName: ''),
-              //   showEdit: false,
-              // )
-            ])),
+                  const Text(
+                    'Most Answered Poll',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+                  ),
+                  PollCardBox()
+                ])),
           ))
         ],
       ),
