@@ -13,7 +13,7 @@ public class PollAnswerController {
         this.pollAnswerService = pollAnswerService;
     }
 
-    @PostMapping("{pollOptionId}")
+    @PutMapping("{pollOptionId}")
     public void create(@PathVariable Long pollOptionId) {
         pollAnswerService.create (pollOptionId);
     }
